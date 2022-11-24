@@ -1,0 +1,19 @@
+pipeline{
+    agent any
+    tools {
+        maven 'MAVEN'
+    }
+    stages {
+        stage('Build Maven') {
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'c9525046-dd2d-45dc-ba03-68c56280dcb7', url: 'https://github.com/Tejagopal/jenkinsDOCKER.git']]])
+                 
+                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
+
+                
+              
+            }
+        }
+                
+            }
+        }
